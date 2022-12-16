@@ -1,0 +1,43 @@
+*{
+  font-family: Helvetica, sans-serif;
+}
+
+body{
+  padding: 60px;
+}
+
+input {
+  width: 100%;
+  font-size: 1.2em;
+  padding: 10px;
+  color: rgb(129, 129, 129);
+}
+
+.card-grid ol{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: min-content;
+  /* align-content: center; */
+  border: 1px solid grey;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.card p {
+  /* padding: 5px; */
+  text-align: center;
+}
+
+.card img{
+  max-height: 170px;
+}
