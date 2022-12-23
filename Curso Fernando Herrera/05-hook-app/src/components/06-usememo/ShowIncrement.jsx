@@ -7,7 +7,7 @@ const ShowIncrement = ({ increment }) => {
     <button
       className='btn btn-primary'
       onClick={() => {
-        increment()
+        increment(5) // 5 es el valor de mi value
       }}
     >
       Incrementar
