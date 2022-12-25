@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-export const Hijo = ({ numero, incrementar }) => {
+const Hijo = ({ numero, incrementar }) => {
   console.log('  Me volví a generar :(  ')
 
   return (
@@ -12,3 +12,5 @@ export const Hijo = ({ numero, incrementar }) => {
     </button>
   )
 }
+
+export default memo(Hijo)
