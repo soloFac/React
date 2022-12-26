@@ -13,9 +13,13 @@ import './components/08-useReducer/intro-reducer'
 // import { HookApp } from './HookApp';
 // import TodoApp from './components/08-useReducer/TodoApp'
 import MainApp from './components/09-useContext/MainApp'
+import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render(
-  <MainApp />,
+  // BrowserRouter es hoc (high order component), es decir, es un componente que envuelve a otro componente
+  <BrowserRouter>
+    <MainApp />
+  </BrowserRouter>,
   document.getElementById('root')
 )
 
