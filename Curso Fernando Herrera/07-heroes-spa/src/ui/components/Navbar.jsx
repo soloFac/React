@@ -1,7 +1,15 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
-export const Navbar = () => {
+export const Navbar = (props) => {
+  const navigate = useNavigate()
+
+  const onLogout = () => {
+    navigate('/login', {
+      replace: true
+    })
+  }
+
   return (
     <nav className='navbar navbar-expand-sm navbar-dark bg-dark p-2'>
 
@@ -16,14 +24,14 @@ export const Navbar = () => {
         <div className='navbar-nav'>
 
           <NavLink
-            className={({isActive}) =>`nav-item nav-link ${isActive ? 'active' : ''}`}
+            className={({ isActive }) => `nav-item nav-link ${isActive ? 'active' : ''}`}
             to='/marvel'
           >
             Marvel
           </NavLink>
 
           <NavLink
-            className={({isActive}) =>`nav-item nav-link ${isActive ? 'active' : ''}`}
+            className={({ isActive }) => `nav-item nav-link ${isActive ? 'active' : ''}`}
             to='/dc'
           >
             DC
@@ -38,6 +46,7 @@ export const Navbar = () => {
           </span>
           <button
             className='nav-item nav-link btn'
+            onClick={ onLogout }
           >
             Logout
           </button>

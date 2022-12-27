@@ -19,9 +19,9 @@ module.exports = {
   plugins: [
     'react'
   ],
-  ignorePatterns: ['*', './**/middleware.ts'],
   rules: {
     indent: ['error', 2],
+    'import/export': 0,
     'array-bracket-spacing': [2, 'never'],
     'object-curly-spacing': [2, 'always', {
       objectsInObjects: true,
