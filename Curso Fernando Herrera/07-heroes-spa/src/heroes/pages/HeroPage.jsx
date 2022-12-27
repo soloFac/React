@@ -17,7 +17,7 @@ export const HeroPage = () => {
   }
 
   return (
-    <div className='row mt-5'>
+    <div className='row mt-5 animate__animated animate__fadeInDown'>
       <div className='col-4'>
         <img
           src={`/assets/heroes/${id}.jpg`}

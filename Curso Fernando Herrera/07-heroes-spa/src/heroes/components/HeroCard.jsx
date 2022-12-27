@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import 'animate.css'
 
 const CharactersByHero = ({ alterEgo, characters }) => {
   // if (alterEgo === characters) return (<></>)
@@ -15,10 +16,10 @@ export const HeroCard = ({ id, superhero, publisher, alterEgo, firstAppearance, 
   // const charactersByHero = <p>{ characters }</p>
 
   return (
-    <div className='col'>
+    <div className='col '>
       <div className='card'>
         <div className='row no-gutters'>
-          <div className='col-4'>
+          <div className='col-4 animate__animated animate__fadeIn'>
             <img src={heroImageUrl} alt={superhero} className='card-img' />
           </div>
 
