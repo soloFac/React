@@ -4,7 +4,6 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 import { JournalApp } from './JournalApp'
 import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider } from '@emotion/react'
 import { Provider } from 'react-redux'
 import { store } from './store'
 
