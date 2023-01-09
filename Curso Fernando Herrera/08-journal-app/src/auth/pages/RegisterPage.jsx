@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AuthLayout } from '../layout/AuthLayout'
 import { Button, Grid, Link, TextField, Typography } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from '../../hooks'
 
 const formData = {
-  email: 'franco@google.com',
-  password: '123456',
-  displayName: 'Franco de la Rosa'
+  email: '',
+  password: '',
+  displayName: ''
 }
 
 const formValidations = {
@@ -17,6 +17,8 @@ const formValidations = {
 }
 
 export const RegisterPage = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false)
+
   const {
     formState, displayName, email, password, onInputChange,
     isFormValid, displayNameValid, emailValid, passwordValid
@@ -24,11 +26,13 @@ export const RegisterPage = () => {
 
   const onSubmit = event => {
     event.preventDefault()
+    setFormSubmitted(true)
     console.log(formState)
   }
 
   return (
     <AuthLayout title='Login'>
+      <h1>FormValid {isFormValid ? 'Valido' : 'Incorrecto'} </h1>
 
       <form onSubmit={onSubmit}>
         <Grid container>
@@ -41,7 +45,7 @@ export const RegisterPage = () => {
               name='displayName'
               value={displayName}
               onChange={onInputChange}
-              error={!displayNameValid}
+              error={!!displayNameValid && formSubmitted}
               helperText={displayNameValid}
             />
           </Grid>
@@ -55,6 +59,8 @@ export const RegisterPage = () => {
               name='email'
               value={email}
               onChange={onInputChange}
+              error={!!emailValid && formSubmitted}
+              helperText={emailValid}
             />
           </Grid>
 
@@ -67,6 +73,8 @@ export const RegisterPage = () => {
               name='password'
               value={password}
               onChange={onInputChange}
+              error={!!passwordValid && formSubmitted}
+              helperText={passwordValid}
             />
           </Grid>
 
