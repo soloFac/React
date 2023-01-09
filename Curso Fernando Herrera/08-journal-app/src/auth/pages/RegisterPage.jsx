@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { AuthLayout } from '../layout/AuthLayout'
-import { Button, Grid, Link, TextField, Typography } from '@mui/material'
+import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from '../../hooks'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { startCreatingUserWithEmailPassword } from '../../store/auth/thunks'
 
 const formData = {
@@ -22,6 +22,9 @@ export const RegisterPage = () => {
   const dispatch = useDispatch()
   const [formSubmitted, setFormSubmitted] = useState(false)
 
+  const { status, errorMessage } = useSelector(state => state.auth)
+  const isCheckingAuthentication = useMemo(() => status === 'checking', [status])
+
   const {
     formState, displayName, email, password, onInputChange,
     isFormValid, displayNameValid, emailValid, passwordValid
@@ -32,6 +35,7 @@ export const RegisterPage = () => {
     setFormSubmitted(true)
 
     if (!isFormValid) return
+    if (isCheckingAuthentication) return
 
     dispatch(startCreatingUserWithEmailPassword(formState))
     console.log(formState)
@@ -39,7 +43,7 @@ export const RegisterPage = () => {
 
   return (
     <AuthLayout title='Login'>
-      <h1>FormValid {isFormValid ? 'Valido' : 'Incorrecto'} </h1>
+      {/* <h1>FormValid {isFormValid ? 'Valido' : 'Incorrecto'} </h1> */}
 
       <form onSubmit={onSubmit}>
         <Grid container>
@@ -86,8 +90,19 @@ export const RegisterPage = () => {
           </Grid>
 
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+            <Grid
+              item
+              xs={12}
+              display={errorMessage ? '' : 'none'}
+            >
+              <Alert severity='error'>
+                {errorMessage}
+              </Alert>
+            </Grid>
+
             <Grid item xs={12}>
               <Button
+                disabled={isCheckingAuthentication}
                 type='submit'
                 variant='contained'
                 fullWidth
