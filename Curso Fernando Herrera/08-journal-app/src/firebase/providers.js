@@ -69,3 +69,8 @@ export const registerUserWithEmailPassword = async ({ email, password, displayNa
     }
   }
 }
+
+export const logoutFirebase = async () => {
+  // Esto cierra con cualquiera sea el método de autenticación con el cual estemos autenticado
+  return await FirebaseAuth.signOut()
+}
