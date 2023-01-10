@@ -13,7 +13,8 @@ export const startGoogleSignIn = () => {
 
     const result = await signInWithGoogle()
 
-    if (!result.ok) return dispatch(logout(result.errorMessage))
+    const { errorMessage } = result
+    if (!result.ok) return dispatch(logout({ errorMessage }))
 
     // delete result.ok
     dispatch(login(result))
@@ -40,6 +41,7 @@ export const startCreatingUserWithEmailPassword = ({ email, password, displayNam
     dispatch(checkingCredentials())
     const { ok, uid, photoURL, errorMessage } = await registerUserWithEmailPassword({ email, password, displayName })
 
+    console.log('paso por withEP')
     if (!ok) return dispatch(logout({ errorMessage }))
 
     dispatch(login({ uid, displayName, email, photoURL }))
