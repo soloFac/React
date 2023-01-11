@@ -1,10 +1,13 @@
 import { collection, doc, setDoc } from 'firebase/firestore/lite'
 import { FirebaseDB } from '../../firebase/config'
+import { savingNewNote, addNewEmptyNote, setActiveNote } from './journalSlice'
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
     // Para grabar en firebase vamos a utilizar el uid del usuario
     const { uid } = getState().auth
+
+    dispatch(savingNewNote())
 
     const newNote = {
       title: '',
@@ -16,8 +19,10 @@ export const startNewNote = () => {
     // newDoc es el que genera el id en notes
     await setDoc(newDoc, newNote)
 
+    newNote.id = newDoc.id
+
     //! dispatch ()
-    // dispatch (newNote)
-    // dispatch (activarNote)
+    dispatch(addNewEmptyNote(newNote))
+    dispatch(setActiveNote(newNote))
   }
 }
