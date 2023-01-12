@@ -31,15 +31,17 @@ export const journalSlice = createSlice({
     setActiveNote: (state, action) => {
       // Va a ser la nota que quiero establecer en pantalla
       state.active = action.payload
+      state.messageSaved = ''
     },
     setNotes: (state, action) => {
       state.notes = action.payload
     },
     setSaving: (state) => {
       state.isSaving = true
+      state.messageSaved = ''
       // TODO: mensaje de error...
     },
-    updateNote: (state, action) => {
+    updateNote: (state, action) => { // payload: note
       state.isSaving = false
       state.notes = state.notes.map(note => {
         if (note.id === action.payload.id) {
@@ -47,6 +49,7 @@ export const journalSlice = createSlice({
         }
         return note
       })
+      state.messageSaved = `${action.payload.title}, actualizada correctamente`
     },
     deleteNoteById: (state, action) => {
 
