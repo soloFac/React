@@ -8,8 +8,8 @@ import { useForm } from '../../hooks'
 import { checkingAuthentication, startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth'
 
 const formData = {
-  email: 'francopdlr@gmail.com',
-  password: '123456'
+  email: '',
+  password: ''
 }
 
 export const LoginPage = () => {

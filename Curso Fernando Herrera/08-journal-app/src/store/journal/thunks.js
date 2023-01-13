@@ -1,6 +1,6 @@
 import { collection, doc, setDoc } from 'firebase/firestore/lite'
 import { FirebaseDB } from '../../firebase/config'
-import { savingNewNote, addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote } from './journalSlice'
+import { savingNewNote, addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, setPhotosToActiveNotes } from './journalSlice'
 import { fileUpload, loadNotes } from '../../helpers'
 
 export const startNewNote = () => {
@@ -62,6 +62,17 @@ export const startUploadingFiles = (files = []) => {
   return async (dispatch) => {
     dispatch(setSaving())
 
-    await fileUpload(files[0])
+    // await fileUpload(files[0])
+    const fileUploadPromises = []
+    for (const file of files) {
+      // Aqui en este punto todavia no las estoy disparando
+      fileUploadPromises.push(fileUpload(file))
+    }
+    // Ahora para dispararlas Promise.all -> el cual me devuelve un arreglo con cada una de las
+    // resoluciones de las promesas en ese mismo orden
+    const photosUrls = await Promise.all(fileUploadPromises)
+
+    dispatch(setPhotosToActiveNotes(photosUrls))
+    console.log(photosUrls)
   }
 }
