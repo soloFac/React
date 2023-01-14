@@ -7,6 +7,7 @@ import es from 'date-fns/locale/es'
 import 'react-datepicker/dist/react-datepicker.css'
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
+import { useUiStore } from '../../hooks/useUiStore'
 
 registerLocale('es', es)
 
@@ -24,7 +25,7 @@ const customStyles = {
 Modal.setAppElement('#root')
 
 export const CalendarModal = () => {
-  const [isOpen, setIsOpen] = useState(true)
+  const { isDateModalOpen, closeDateModal } = useUiStore()
   const [formSubmitted, setFormSubmitted] = useState(false)
 
   const [formValues, setFormValues] = useState({
@@ -43,8 +44,7 @@ export const CalendarModal = () => {
   }, [formValues.title, formSubmitted])
 
   const onCloseModal = () => {
-    console.log('cerrando modal')
-    setIsOpen(false)
+    closeDateModal()
   }
 
   const onInputChange = ({ target }) => {
@@ -84,12 +84,13 @@ export const CalendarModal = () => {
     // cerrar modal
   }
 
-  // Todo: Agregar validacion de que la cambiar la fecha de inicio tambien la fecha de fin cambie,
-  // Todo: si la fecha de fin es menor. Aplica lo mismo para la hora, si estan en el mismo día.
+  // TODO
+  // Agregar validacion de que la cambiar la fecha de inicio tambien la fecha de fin cambie,
+  // si la fecha de fin es menor. Aplica lo mismo para la hora, si estan en el mismo día.
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={isDateModalOpen}
       onRequestClose={onCloseModal}
       style={customStyles}
       className='modal'
