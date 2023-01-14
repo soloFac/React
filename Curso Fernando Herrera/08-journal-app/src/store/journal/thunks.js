@@ -1,6 +1,6 @@
-import { collection, doc, setDoc } from 'firebase/firestore/lite'
+import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore/lite'
 import { FirebaseDB } from '../../firebase/config'
-import { savingNewNote, addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, setPhotosToActiveNotes } from './journalSlice'
+import { savingNewNote, addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, setPhotosToActiveNotes, deleteNoteById } from './journalSlice'
 import { fileUpload, loadNotes } from '../../helpers'
 
 export const startNewNote = () => {
@@ -74,5 +74,19 @@ export const startUploadingFiles = (files = []) => {
 
     dispatch(setPhotosToActiveNotes(photosUrls))
     console.log(photosUrls)
+  }
+}
+
+export const startDeletingNote = () => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth
+    const { active: note } = getState().journal
+
+    const docRef = doc(FirebaseDB, `${uid}/journal/notes/${note.id}`)
+    await deleteDoc(docRef)
+
+    // Todo: delete images from cloudinary.
+
+    dispatch(deleteNoteById(note.id))
   }
 }

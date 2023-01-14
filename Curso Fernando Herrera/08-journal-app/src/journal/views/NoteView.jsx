@@ -2,14 +2,14 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.css'
 
-import { SaveOutlined, UploadOutlined } from '@mui/icons-material'
+import { DeleteOutline, SaveOutlined, UploadOutlined } from '@mui/icons-material'
 import { Button, Grid, IconButton, TextField, Typography } from '@mui/material'
 
 import { ImageGallery } from '../components'
 import { useForm } from '../../hooks/useForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActiveNote } from '../../store/journal/journalSlice'
-import { startSaveNote, startUploadingFiles } from '../../store/journal/thunks'
+import { startDeletingNote, startSaveNote, startUploadingFiles } from '../../store/journal/thunks'
 
 export const NoteView = () => {
   const dispatch = useDispatch()
@@ -46,6 +46,10 @@ export const NoteView = () => {
 
     // console.log('subiendo archivos')
     dispatch(startUploadingFiles(target.files))
+  }
+
+  const onDelete = () => {
+    dispatch(startDeletingNote())
   }
 
   return (
@@ -91,28 +95,39 @@ export const NoteView = () => {
 
       <Grid container>
         <TextField
+          fullWidth
+          label='Título'
+          placeholder='Ingrese un titulo'
+          sx={{ border: 'none', mb: 1 }}
           type='text'
           variant='filled'
-          fullWidth
-          placeholder='Ingrese un titulo'
-          label='Título'
-          sx={{ border: 'none', mb: 1 }}
           name='title'
           value={title}
           onChange={onInputChange}
         />
 
         <TextField
-          type='text'
-          variant='filled'
           fullWidth
+          minRows={5}
           multiline
           placeholder='¿Qué sucedió en el día de hoy?'
-          minRows={5}
+          type='text'
+          variant='filled'
           name='body'
           value={body}
           onChange={onInputChange}
         />
+      </Grid>
+
+      <Grid container justifyContent='end'>
+        <Button
+          onClick={onDelete}
+          sx={{ mt: 2 }}
+          color='error'
+        >
+          <DeleteOutline />
+          Borrar
+        </Button>
       </Grid>
 
       {/* Image gallery */}
