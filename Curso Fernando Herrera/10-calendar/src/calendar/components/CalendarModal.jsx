@@ -1,8 +1,12 @@
-import { addHours } from 'date-fns/esm'
+import { addHours, differenceInSeconds } from 'date-fns/esm'
 import React, { useState } from 'react'
+
 import Modal from 'react-modal'
-import DatePicker from 'react-datepicker'
+import DatePicker, { registerLocale } from 'react-datepicker'
+import es from 'date-fns/locale/es'
 import 'react-datepicker/dist/react-datepicker.css'
+
+registerLocale('es', es)
 
 const customStyles = {
   content: {
@@ -47,6 +51,29 @@ export const CalendarModal = () => {
     })
   }
 
+  const onSubmit = (event) => {
+    event.preventDefault()
+    const { start, end } = formValues
+
+    const difference = differenceInSeconds(end, start)
+
+    if (isNaN(difference) || difference <= 0) {
+      console.log('Error en fechas')
+      return
+    }
+
+    if (formValues.title.length <= 0) return
+
+    console.log(formValues)
+
+    // TODO
+    // Remover errores en pantalla
+    // cerrar modal
+  }
+
+  // Todo: Agregar validacion de que la cambiar la fecha de inicio tambien la fecha de fin cambie,
+  // Todo: si la fecha de fin es menor. Aplica lo mismo para la hora, si estan en el mismo día.
+
   return (
     <Modal
       isOpen={isOpen}
@@ -58,7 +85,7 @@ export const CalendarModal = () => {
     >
       <h1> Nuevo evento </h1>
       <hr />
-      <form className='container'>
+      <form onSubmit={onSubmit} className='container'>
 
         <div className='form-group mb-2'>
           <label>Fecha y hora inicio</label>
@@ -67,6 +94,9 @@ export const CalendarModal = () => {
             selected={formValues.start}
             onChange={event => onDateChange(event, 'start')}
             dateFormat='Pp'
+            showTimeSelect
+            locale='es'
+            timeCaption='Hora'
           />
         </div>
 
@@ -78,6 +108,9 @@ export const CalendarModal = () => {
             selected={formValues.end}
             onChange={event => onDateChange(event, 'end')}
             dateFormat='Pp'
+            showTimeSelect
+            locale='es'
+            timeCaption='Hora'
           />
         </div>
 
