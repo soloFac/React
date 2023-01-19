@@ -8,12 +8,10 @@ const app = express()
 app.use(express.static('public'))
 
 // Rutas
-// app.get('/', (req, res) => {
-
-//   res.json({
-//     ok: true
-//   })
-// })
+// TODO: auth // crear, login, renew
+// Cualquier cosa que exporte el archivo './routes/auth' se va a habilitar en la ruta /api/auth
+app.use('/api/auth', require('./routes/auth'))
+// TODO: CRUD: Eventos
 
 
 // Escuchar peticiones
