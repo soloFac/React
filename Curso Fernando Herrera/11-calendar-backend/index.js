@@ -4,8 +4,13 @@ require('dotenv').config()
 // Crear el servidor de express
 const app = express()
 
+// MIDDLEWARES app.use()
+
 // Directorio Publico
-app.use(express.static('public'))
+app.use( express.static('public') )
+
+// Lectura y parseo del body
+app.use( express.json() )
 
 // Rutas
 // TODO: auth // crear, login, renew
