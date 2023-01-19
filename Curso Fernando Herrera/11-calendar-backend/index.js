@@ -1,8 +1,12 @@
 const express = require('express')
+const { dbConnection } = require('./db/config')
 require('dotenv').config()
 
 // Crear el servidor de express
 const app = express()
+
+// Base de datos
+dbConnection()
 
 // MIDDLEWARES app.use()
 
@@ -13,7 +17,6 @@ app.use( express.static('public') )
 app.use( express.json() )
 
 // Rutas
-// TODO: auth // crear, login, renew
 // Cualquier cosa que exporte el archivo './routes/auth' se va a habilitar en la ruta /api/auth
 app.use('/api/auth', require('./routes/auth'))
 // TODO: CRUD: Eventos

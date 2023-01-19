@@ -8,7 +8,7 @@
 
 // Otra forma de realizar lo mismo
 const { Router } = require('express')
-// check se va a encargar de validar un campo en particular
+// check se va a encargar de validar un campo en particular 
 const { check } = require('express-validator')
 const { fieldValidator } = require('../middlewares/fieldValidator')
 const router = Router()
