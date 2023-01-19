@@ -8,13 +8,28 @@
 
 // Otra forma de realizar lo mismo
 const { Router } = require('express')
+// check se va a encargar de validar un campo en particular
+const { check } = require('express-validator')
 const router = Router()
 
 const { crearUsuario, loginUsuario, revalidarToken } = require('../controllers/auth')
 
-router.post('/new', crearUsuario)
+router.post(
+  '/new', 
+  [ // middlewares
+    check('name', 'El nombre es obligatorio').not().isEmpty(),
+    check('email', 'El email es obligatorio').isEmail(),
+    check('password', 'El password debe de ser de 6 caracteres').isLength({ min: 6 })
+  ], 
+  crearUsuario )
 
-router.post('/', loginUsuario)
+router.post(
+  '/',
+  [ // middlewares
+    check('email', 'El email es obligatorio').isEmail(),
+    check('password', 'El password debe de ser de 6 caracteres').isLength({ min: 6 })
+  ],
+  loginUsuario)
 
 router.get('/renew', revalidarToken)
 
