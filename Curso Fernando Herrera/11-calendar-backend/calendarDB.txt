@@ -1,0 +1,5 @@
+userName: soloFac
+pass: k5kMPpJ1aC3ZifCL
+
+db user: mern_user
+db pass: 2xLSmekQX47uUyF3
