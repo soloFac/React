@@ -23,7 +23,7 @@ app.use( express.json() )
 // Rutas
 // Cualquier cosa que exporte el archivo './routes/auth' se va a habilitar en la ruta /api/auth
 app.use('/api/auth', require('./routes/auth'))
-// TODO: CRUD: Eventos
+app.use('/api/events', require('./routes/events'))
 
 
 // Escuchar peticiones
