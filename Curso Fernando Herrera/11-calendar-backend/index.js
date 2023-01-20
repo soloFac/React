@@ -1,12 +1,16 @@
 const express = require('express')
-const { dbConnection } = require('./db/config')
 require('dotenv').config()
+const cors = require('cors')
+const { dbConnection } = require('./db/config')
 
 // Crear el servidor de express
 const app = express()
 
 // Base de datos
 dbConnection()
+
+// CORS
+app.use(cors())
 
 // MIDDLEWARES app.use()
 
