@@ -8,12 +8,13 @@
 
 // Otra forma de realizar lo mismo
 const { Router } = require('express')
+const router = Router()
 // check se va a encargar de validar un campo en particular 
 const { check } = require('express-validator')
-const { fieldValidator } = require('../middlewares/fieldValidator')
-const router = Router()
+
 const { crearUsuario, loginUsuario, revalidarToken } = require('../controllers/auth')
 const { jwtValidator } = require('../middlewares/jwtValidator')
+const { fieldValidator } = require('../middlewares/fieldValidator')
 
 router.post(
   '/new', 
