@@ -37,14 +37,6 @@ module.exports = {
       component: true,
       html: false
     }],
-    'no-unused-vars': 'warn',
-    'no-use-before-define': [
-      'warn',
-      {
-        classes: true,
-        functions: true,
-        typedefs: true
-      }
-    ]
+    'no-unused-vars': 'warn'
   }
 }
