@@ -18,8 +18,10 @@ const jwtValidator = ( req, res = response, next ) => {
       process.env.SECRET_JWT_SEED
     )
 
+    // Estos son campos que se pueden agregar a la req, luego voy a poder extraerlos cuando realice la petición
     req.uid = uid
     req.name = name
+    // req.prueba = 'Esto es una prueba'
 
   } catch (error) {
     console.log(error);
@@ -28,9 +30,7 @@ const jwtValidator = ( req, res = response, next ) => {
       msg: 'Token no valido'
     })
   }
-  
-  // console.log(token);
-
+  // para que continue con el siguiente middleware
   next()
 }
 

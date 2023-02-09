@@ -17,7 +17,8 @@ const EventoSchema = Schema({
     required: true
   },
   user: {
-    // De esta forma en type le especificamos la referencia 
+    // De esta forma en type le especificamos la referencia a la coleccion de usuarios
+    //ObjectId es el tipo de dato que se guarda en la base de datos
     type: Schema.Types.ObjectId,
     ref: 'Usuario',
     required: true

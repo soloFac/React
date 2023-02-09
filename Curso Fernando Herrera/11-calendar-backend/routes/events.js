@@ -37,13 +37,25 @@ router.post(
 
 // Actualizar eventos
 router.put(
-    '/:id', 
+    '/:id',
+    [
+        check('title', 'El titlo es obligatorio').not().isEmpty(),
+        check('start', 'La fecha de inicio es obligatoria').custom( isDate ),
+        check('end', 'La fecha de finalización es obligatoria').custom( isDate ),
+        fieldValidator
+    ],
     actualizarEvento
 )
 
 // Borrar eventos
 router.delete(
-    '/:id', 
+    '/:id',
+    [
+        check('title', 'El titlo es obligatorio').not().isEmpty(),
+        check('start', 'La fecha de inicio es obligatoria').custom( isDate ),
+        check('end', 'La fecha de finalización es obligatoria').custom( isDate ),
+        fieldValidator
+    ],
     eliminarEvento
 )
 

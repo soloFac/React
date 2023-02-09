@@ -2,7 +2,7 @@ const moment = require('moment')
 
 // Ante cualquier duda revisar la documentacion
 const isDate = ( value, rest ) => {
-  console.log('---------------------------------------------isDate---------------------------------------------');
+  // console.log('---------------------------------------------isDate---------------------------------------------');
   
   if ( !value ){
     return false
