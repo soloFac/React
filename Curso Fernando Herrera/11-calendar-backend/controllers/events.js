@@ -81,7 +81,44 @@ const actualizarEvento = async (req, res = response) => {
   })
 }
 
-const eliminarEvento = (req, res = response) => {
+const eliminarEvento = async (req, res = response) => {
+  const eventoId = req.params.id
+  const uid = req.uid
+
+  console.log('eventoId: ', eventoId)
+  console.log('uid: ', uid)
+
+  try {
+    const evento = await Evento.findById( eventoId )
+    
+    if ( !evento ) {
+      return res.status(404).json({
+        ok: false,
+        msg: 'Evento no existe por ese id'
+      })
+    }
+    
+    if ( evento.user.toString() !== uid) {
+      return res.status(401).json({
+        ok: false,
+        msg: 'No tiene privilegio de eliminar este evento'
+      })
+    }
+    
+    await Evento.findOneAndDelete( eventoId )
+
+    return res.json({
+      ok: true,
+      msg: 'Evento eliminado'
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      ok: false,
+      msg: 'Hable con el administrador...'
+    })
+  }
+
   res.json({
     ok: true,
     msg: 'eliminarEvento'
