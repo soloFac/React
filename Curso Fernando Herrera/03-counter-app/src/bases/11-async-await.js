@@ -2,27 +2,23 @@
 // getImagenPromesa().then( console.log )
 
 export const getImagen = async () => {
+  try {
+    const apiKey = 'PoODAuj9zcGg9lhIMpYqWKbh4IiWWWms'
+    const resp = await fetch( `https://api.giphy.com/v1/gifs/random?api_key=${ apiKey }` )
+    const { data } = await resp.json()
 
-    try {
-        const apiKey = 'PoODAuj9zcGg9lhIMpYqWKbh4IiWWWms'
-        const resp = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${apiKey}`)
-        const { data } = await resp.json();
+    const { url } = data.images.original
 
-        const { url } = data.images.original;
-
-        return url;
-    } catch (error) {
-        // manejo del error
-        // console.error( error )
-        return 'No existe';
-    }
-    
-
+    return url
+  } catch ( error ) {
+    // manejo del error
+    // console.error( error )
+    return new Error( 'No existe' )
+  }
 }
 
 getImagen()
-    .then(console.log)
-
+  .then( console.log )
 
 // const apiKey = 'PoODAuj9zcGg9lhIMpYqWKbh4IiWWWms'
 

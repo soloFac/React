@@ -1,4 +1,4 @@
-const activo = true;
+const activo = true
 
 // let mensaje = '';
 
@@ -10,6 +10,6 @@ const activo = true;
 
 // const mensaje = ( activo ) ? 'Activo' : 'Inactivo';
 
-const mensaje = activo && 'Activo';
+const mensaje = activo && 'Activo'
 
 console.log( mensaje )
